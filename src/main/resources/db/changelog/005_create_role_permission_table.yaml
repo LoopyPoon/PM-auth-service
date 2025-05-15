@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005
+      author: iholin
+      changes:
+        - createTable:
+            tableName: role_permission
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: permission_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: role_permission
+            baseColumnNames: role_id
+            referencedTableName: roles
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_role_permission_role
+        - addForeignKeyConstraint:
+            baseTableName: role_permission
+            baseColumnNames: permission_id
+            referencedTableName: permissions
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_role_permission_permission
